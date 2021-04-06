@@ -58,7 +58,7 @@ def show_boxes(inputfile):
     # loading models
     face_detection = load_detection_model(detection_model_path)
     emotion_classifier = load_model(emotion_model_path, compile=False)
-    gender_classification = load_model(gender_model_path)
+    gender_classification = load_model(gender_model_path, compile=False)
 
     # getting input model shapes for inference
     emotion_target_size = emotion_classifier.input_shape[1:3]

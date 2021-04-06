@@ -12,3 +12,7 @@ source rakutenvenv/bin/activate
 pip3 install -r requirements.txt
 python3 pipeline.py
 ```
+
+## Output File 
+
+Output is saved in output.csv , which is just one meeting inference we need to append all outputs to a new csv
