@@ -6,11 +6,22 @@ import video_bounding_box
 import pandas as pd
 import numpy as np
 import tqdm.auto as tqdm
+import zipfile
 
 INPUT_FILE = 'Kid_mixed.mp4'
 FRAME_PATH = 'KID'
 
 CLASS_NAMES = ['Angry', 'Disgusted', 'Fear', 'Happy', 'Sad', 'Surprised', 'Neutral']
+print("Unzipping models")
+modellist = ['gender_detection.zip','emotion_detection_bounding_boxes.zip','emotion_detection.zip']
+
+if os.path.exists('model'):
+	os.system('rm -rf model')
+os.mkdir('model')
+
+for modelname in modellist:
+	with zipfile.ZipFile(modelname, 'r') as zip_ref:
+	    zip_ref.extractall('model')
 if __name__ == '__main__':
 	feat_score_fold_0,gender_array,time_array = video_bounding_box.show_boxes(INPUT_FILE)
 	#print(feat_score_fold_0)
