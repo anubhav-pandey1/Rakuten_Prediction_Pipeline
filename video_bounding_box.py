@@ -75,6 +75,8 @@ def show_boxes(inputfile):
     gender_array = list()
     time_array = list()
     print("Detecting gender and emotion confidence")
+    height,width,layers=frame.shape
+    imglist = list()
     while(ret):
             #cv2.imshow('video',frame)
             if ret is True:
@@ -157,6 +159,7 @@ def show_boxes(inputfile):
                 #cv2.putText(frame, count//30, (x1, y1-30), cv2.FONT_HERSHEY_SIMPLEX, 0.9, COLOR)
             count += 1
             cv2.imshow('Video box', frame)#Show Final Output --7
+            imglist.append(frame)
             ret, frame = cap.read()
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -168,9 +171,13 @@ def show_boxes(inputfile):
     #     end = base + 30 if base + 30 < len(feat_array) else len(feat_array)
     #     nparr = np.array(feat_array[base:end][:])
     #     feat_in_second.append(np.mean(nparr,axis=0))
-
-    return feat_array,gender_array,time_array
+    height,width,layers=imglist[0].shape
+    video=cv2.VideoWriter('output.mp4',0x7634706d , 20.0,(width,height))
+    for i in range(len(imglist)):
+        video.write(imglist[i])
     cap.release()
     cv2.destroyAllWindows()
+    video.release()
+    return feat_array,gender_array,time_array
 
 #show_boxes()

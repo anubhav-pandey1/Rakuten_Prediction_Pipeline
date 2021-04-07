@@ -8,15 +8,12 @@ import numpy as np
 import tqdm.auto as tqdm
 import zipfile
 
-INPUT_FILE = 'Kid_mixed.mp4'
+INPUT_FILE = 'kid_mixed.mp4'
 FRAME_PATH = 'KID'
 
 CLASS_NAMES = ['Angry', 'Disgusted', 'Fear', 'Happy', 'Sad', 'Surprised', 'Neutral']
 #print("Unzipping models")
 modellist = ['gender_detection.zip','emotion_detection_bounding_boxes.zip','emotion_detection.zip']
-
-if os.path.exists('model'):
-	os.system('rm -rf model')
 
 for modelname in modellist:
 	with zipfile.ZipFile(modelname, 'r') as zip_ref:
